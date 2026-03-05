@@ -1,25 +1,22 @@
 package com.myfirstapi.LearningRESTAPIS.controller;
 
 import com.myfirstapi.LearningRESTAPIS.dto.StudentDto;
-import com.myfirstapi.LearningRESTAPIS.entity.Student;
-import com.myfirstapi.LearningRESTAPIS.repository.studentRepository;
+import com.myfirstapi.LearningRESTAPIS.service.studentService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class studentController {
 
-    private final studentRepository studentRepository;
+    private final studentService studentService;
 
-    public studentController(studentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
-
-    @GetMapping("/student")
-    public List<Student> getStudent(){
-        return studentRepository.findAll();
+    @GetMapping("/students")
+    public List<StudentDto> getAllStudents(){
+        return studentService.getAllStudent();
     }
 
 }
