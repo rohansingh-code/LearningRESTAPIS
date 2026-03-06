@@ -3,8 +3,7 @@ package com.myfirstapi.LearningRESTAPIS.controller;
 import com.myfirstapi.LearningRESTAPIS.dto.StudentDto;
 import com.myfirstapi.LearningRESTAPIS.service.studentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +18,8 @@ public class studentController {
         return studentService.getAllStudent();
     }
 
+    @GetMapping("/students/{id}")
+    public StudentDto getStudentById(@PathVariable Long id){
+        return studentService.getStudentById(id);
+    }
 }

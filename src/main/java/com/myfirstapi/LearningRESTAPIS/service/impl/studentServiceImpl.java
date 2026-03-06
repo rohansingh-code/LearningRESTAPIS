@@ -20,14 +20,25 @@ public class studentServiceImpl implements studentService {
 
         List<Student> students = studentrepository.findAll();
 
-        List<StudentDto> studentDtoList = students.stream()
+        return students.stream()
                 .map(student -> new StudentDto(
                         student.getId(),
                         student.getName(),
                         student.getEmail()
                 ))
                 .toList();
+    }
 
-        return studentDtoList;
+    @Override
+    public StudentDto getStudentById(Long id) {
+
+        Student student = studentrepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+
+        return new StudentDto(
+                student.getId(),
+                student.getName(),
+                student.getEmail()
+        );
     }
 }
