@@ -1,5 +1,6 @@
 package com.myfirstapi.LearningRESTAPIS.service.impl;
 
+import com.myfirstapi.LearningRESTAPIS.dto.AddStudentRequestDto;
 import com.myfirstapi.LearningRESTAPIS.dto.StudentDto;
 import com.myfirstapi.LearningRESTAPIS.entity.Student;
 import com.myfirstapi.LearningRESTAPIS.repository.studentRepository;
@@ -33,6 +34,13 @@ public class studentServiceImpl implements studentService {
         Student student = studentrepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Student not found"));
 
+        return modelMapper.map(student, StudentDto.class);
+    }
+
+    @Override
+    public StudentDto createNewStudent(AddStudentRequestDto addStudentRequestDto) {
+        Student newStudent = modelMapper.map(addStudentRequestDto,Student.class);
+        Student student = studentrepository.save(newStudent);
         return modelMapper.map(student, StudentDto.class);
     }
 }
