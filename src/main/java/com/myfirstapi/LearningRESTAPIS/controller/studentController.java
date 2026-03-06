@@ -1,5 +1,6 @@
 package com.myfirstapi.LearningRESTAPIS.controller;
 
+import com.myfirstapi.LearningRESTAPIS.dto.AddStudentRequestDto;
 import com.myfirstapi.LearningRESTAPIS.dto.StudentDto;
 import com.myfirstapi.LearningRESTAPIS.service.studentService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +23,10 @@ public class studentController {
     @GetMapping("/students/{id}")
     public ResponseEntity<StudentDto> getStudentById(@PathVariable Long id){
         return ResponseEntity.ok(studentService.getStudentById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<AddStudentRequestDto> createNewStudent(@RequestBody ){
+
     }
 }
