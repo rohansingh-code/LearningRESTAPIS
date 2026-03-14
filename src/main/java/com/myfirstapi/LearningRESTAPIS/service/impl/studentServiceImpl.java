@@ -50,4 +50,15 @@ public class studentServiceImpl implements studentService {
                 .orElseThrow(()-> new IllegalArgumentException("student not find"));
         studentrepository.delete(student);
     }
+
+    @Override
+    public StudentDto updateStudent(Long id, AddStudentRequestDto addStudentRequestDto) {
+        Student student = studentrepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+        modelMapper.map(addStudentRequestDto,student);
+
+        student = studentrepository.save(student);
+        StudentDto map = modelMapper.map(student, StudentDto.class);
+        return map;
+    }
 }
