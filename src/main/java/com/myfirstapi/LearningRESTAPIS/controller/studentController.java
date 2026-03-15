@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,5 +47,14 @@ public class studentController {
         StudentDto updatedStudent = studentService.updateStudent(id, addStudentRequestDto);
         return ResponseEntity.ok(updatedStudent);
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDto> updatePartialStudent(
+            @PathVariable Long id,
+            @RequestBody Map<String,Object> updates) {
+
+        StudentDto updatedStudent = studentService.updatePartialStudent(id, updates);
+        return ResponseEntity.ok(updatedStudent);
+    }
+
 
 }
